@@ -1,0 +1,11 @@
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\bin\Debug\zdarzenia.exe.config
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\bin\Debug\zdarzenia.exe
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\bin\Debug\zdarzenia.pdb
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\obj\Debug\zdarzenia.csprojResolveAssemblyReference.cache
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\obj\Debug\zdarzenia.Properties.Resources.resources
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\obj\Debug\zdarzenia.csproj.GenerateResource.Cache
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\obj\Debug\zdarzenia.exe
+D:\dotNETprojects\zadanie3\dotNet_zad3\zdarzenia\zdarzenia\obj\Debug\zdarzenia.pdb
+D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\bin\Debug\zdarzenia.exe.config
+D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.exe
+D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.pdb
