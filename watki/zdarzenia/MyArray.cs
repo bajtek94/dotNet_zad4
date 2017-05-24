@@ -19,7 +19,7 @@ namespace zdarzenia
         protected virtual void OnChanged()
         {
             sizeChanged?.Invoke(tab.Length);
-        }        
+        }
 
         public MyArray()
         {
@@ -27,69 +27,114 @@ namespace zdarzenia
             tab = new int[4];
         }
 
-        
+
 
         public int this[int el]
         {
             get
             {
-                Monitor.Enter(this);
-                if (el < countOfElements)
+                Monitor.Enter(locker);
+                try
                 {
-                    return tab[el];
+                    if (el < countOfElements)
+                    {
+                        return tab[el];
+                    }
+                    else
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
                 }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                Monitor.Exit(this);
+                finally { Monitor.Exit(locker); }
             }
             set
             {
-                if (el >= countOfElements)
+                Monitor.Enter(locker);
+                try
                 {
-                    Console.WriteLine("Dodawanie elementu poza tablicą.");
-                    growTab(el + 1);
-                    countOfElements = el + 1;
+                    if (el >= countOfElements)
+                    {
+                        Console.WriteLine("Dodawanie elementu poza tablicą.");
+                        growTab(el + 1);
+                        countOfElements = el + 1;
+                    }
+                    tab[el] = value;
                 }
-                tab[el] = value;
+                finally { Monitor.Exit(locker); }
             }
         }
 
-        public void Add(int el)
+        public void Add(object el)
         {
-            int count = tab.Count();
-            if (countOfElements >= count)
+            Monitor.Enter(locker);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            try
             {
-                growTab(2 * count);
+                int count = tab.Count();
+                if (countOfElements >= count)
+                {
+                    growTab(2 * count);
+                }
+                tab[countOfElements] = (int)el;
+                countOfElements++;
+                Console.WriteLine("dodano liczbę " + el.ToString());
+                Console.WriteLine("aktualna ilość danych w tablicy: " + countOfElements);
+                OnChanged();
             }
-            tab[countOfElements] = el;
-            countOfElements++;
-            Console.WriteLine("dodano liczbę " + el);
-            Console.WriteLine("aktualna ilość danych w tablicy: " + countOfElements);
-            OnChanged();
+            finally {
+                Monitor.Exit(locker);
+                watch.Stop();
+                var time = watch.ElapsedMilliseconds;
+                Console.WriteLine("INFO: czas wykonania watku wraz z oczekiwnaiem " + time + " ms");
+            }
+
+        }
+        public void AddNotBlocking(object el)
+        {
+            if (!Monitor.TryEnter(locker))
+            {
+                Console.WriteLine("INFO: W tym momencie nie dodano elementu. Element pominiety: " + el.ToString());
+                return;
+            }
+            try
+            {
+                int count = tab.Count();
+                if (countOfElements >= count)
+                {
+                    growTab(2 * count);
+                }
+                tab[countOfElements] = (int)el;
+                countOfElements++;
+                Console.WriteLine("dodano liczbę " + el.ToString());
+                Console.WriteLine("aktualna ilość danych w tablicy: " + countOfElements);
+                OnChanged();
+            }
+            finally
+            {
+                Monitor.Exit(locker);
+            }
+
         }
 
         private void growTab(int newSize)
         {
-            ///////////////////////////////CHWILOWE
             Monitor.Enter(locker);
             try
             {
-                //////// KOD KOD KOD
+                Console.WriteLine("Powiększanie tablicy ...");
+                int count = tab.Count();
+                Console.WriteLine("Stary rozmiar: " + count);
+                Array.Resize(ref tab, newSize);
+                Console.WriteLine("Zwiększono rozmiar do: " + tab.Count());
+                OnChanged();
             }
             finally { Monitor.Exit(locker); }
-            ///////////////////////////////CHWILOWE END
-
-
-
-
-            Console.WriteLine("Powiększanie tablicy ...");
-            int count = tab.Count();
-            Console.WriteLine("Stary rozmiar: " + count);
-            Array.Resize(ref tab, newSize);
-            Console.WriteLine("Zwiększono rozmiar do: " + tab.Count());
-            OnChanged();
         }
+
+        private void save(string path)
+        {
+
+        }
+
     }
 }

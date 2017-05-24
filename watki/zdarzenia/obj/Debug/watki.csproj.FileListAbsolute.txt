@@ -6,3 +6,11 @@ D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.Prope
 D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\watki.csproj.GenerateResource.Cache
 D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.exe
 D:\dotNETprojects\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.pdb
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\bin\Debug\zdarzenia.exe.config
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\bin\Debug\zdarzenia.exe
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\bin\Debug\zdarzenia.pdb
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\watki.csprojResolveAssemblyReference.cache
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.Properties.Resources.resources
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\watki.csproj.GenerateResource.Cache
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.exe
+C:\Users\pnet-22\Desktop\dotNet\zadanie4\dotNet_zad4\watki\zdarzenia\obj\Debug\zdarzenia.pdb
