@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 
 namespace zdarzenia
 {
@@ -10,15 +11,15 @@ namespace zdarzenia
     {
 
         public event MyEventHandler sizeChanged;
-        
+        int[] tab;
+        int countOfElements;
+        readonly object locker = new object();
+
+
         protected virtual void OnChanged()
         {
             sizeChanged?.Invoke(tab.Length);
-        }
-
-
-        int[] tab;
-        int countOfElements;
+        }        
 
         public MyArray()
         {
@@ -32,6 +33,7 @@ namespace zdarzenia
         {
             get
             {
+                Monitor.Enter(this);
                 if (el < countOfElements)
                 {
                     return tab[el];
@@ -40,6 +42,7 @@ namespace zdarzenia
                 {
                     throw new IndexOutOfRangeException();
                 }
+                Monitor.Exit(this);
             }
             set
             {
@@ -69,6 +72,18 @@ namespace zdarzenia
 
         private void growTab(int newSize)
         {
+            ///////////////////////////////CHWILOWE
+            Monitor.Enter(locker);
+            try
+            {
+                //////// KOD KOD KOD
+            }
+            finally { Monitor.Exit(locker); }
+            ///////////////////////////////CHWILOWE END
+
+
+
+
             Console.WriteLine("Powiększanie tablicy ...");
             int count = tab.Count();
             Console.WriteLine("Stary rozmiar: " + count);
