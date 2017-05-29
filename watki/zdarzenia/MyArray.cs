@@ -66,8 +66,11 @@ namespace zdarzenia
 
         public void Add(object el)
         {
-            Monitor.Enter(locker);
             var watch = System.Diagnostics.Stopwatch.StartNew();
+            Monitor.Enter(locker);
+            watch.Stop();
+            var time = watch.ElapsedMilliseconds;
+            Console.WriteLine("INFO: czas oczekiwnia " + time + " ms");
             try
             {
                 int count = tab.Count();
@@ -77,15 +80,13 @@ namespace zdarzenia
                 }
                 tab[countOfElements] = (int)el;
                 countOfElements++;
-                Console.WriteLine("dodano liczbę " + el.ToString());
+                Console.WriteLine("dodano liczbę metoda Add: " + el.ToString());
                 Console.WriteLine("aktualna ilość danych w tablicy: " + countOfElements);
                 OnChanged();
             }
             finally {
                 Monitor.Exit(locker);
-                watch.Stop();
-                var time = watch.ElapsedMilliseconds;
-                Console.WriteLine("INFO: czas wykonania watku wraz z oczekiwnaiem " + time + " ms");
+                
             }
 
         }
@@ -105,7 +106,7 @@ namespace zdarzenia
                 }
                 tab[countOfElements] = (int)el;
                 countOfElements++;
-                Console.WriteLine("dodano liczbę " + el.ToString());
+                Console.WriteLine("dodano liczbę motoda AddNotBlocking: " + el.ToString());
                 Console.WriteLine("aktualna ilość danych w tablicy: " + countOfElements);
                 OnChanged();
             }
@@ -131,9 +132,26 @@ namespace zdarzenia
             finally { Monitor.Exit(locker); }
         }
 
-        private void save(string path)
+        public void save()
         {
+            string lines = "";
+            for(int i = 0; i < countOfElements; i++)
+            {
+                if (i < countOfElements - 1)
+                {
+                    lines = lines + this[i].ToString() + ", ";
+                }
+                else
+                {
+                    lines = lines + this[i].ToString();
+                }
+            }
+            
+            // Write the string to a file.
+            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\pnet-22\\Desktop\\myArray.txt");
+            file.WriteLine(lines);
 
+            file.Close();
         }
 
     }
